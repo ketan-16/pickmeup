@@ -16,19 +16,20 @@
         body {
             margin: 0;
             padding: 0;
-
         }
 
         body {
             background-color: #c5e6db;
             font-family: 'Poppins', sans-serif;
+            max-height: 100vh;
+            transition: 0.25s;
         }
 
         .header h2 {
             color: white;
             text-align: center;
             text-shadow: 3px 3px 10px rgba(0, 0, 0, .25);
-            padding-top: 0.5em;
+            padding-top: 0em;
 
         }
 
@@ -37,6 +38,7 @@
             height: 70vh;
             overflow: scroll;
             scroll-snap-type: y mandatory;
+            scroll-snap-stop: always;
         }
 
         .scrollable .card {
@@ -46,8 +48,18 @@
             background-color: white;
             color: rgba(0, 0, 0, .55);
             border-radius: 2.5vw;
-            box-shadow: 3px 3px 10px rgb(0 0 0 / 0.15);
+            box-shadow: 5px 5px 15px rgb(0 0 0 / 0.25);
             scroll-snap-align: start;
+            scroll-snap-stop: always;
+            position: relative;
+            transition: 0.25s;
+        }
+
+        .card span {
+            font-weight: 800;
+            position: absolute;
+            right: 5vw;
+            bottom: 2vh;
         }
 
         .card p {
@@ -104,48 +116,72 @@
         <div class="card">
             <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure facilis esse officiis? Laudantium quas
                 voluptates beatae recusandae.</h2>
-            <p>PickMeUp.io</p>
+            <span>PickMeUp.io</span>
         </div>
         <div class="card">
             <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure facilis esse officiis? Laudantium quas
                 voluptates beatae recusandae.</h2>
-            <p>PickMeUp.io</p>
+            <span>PickMeUp.io</span>
         </div>
         <div class="card">
             <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure facilis esse officiis? Laudantium quas
                 voluptates beatae recusandae.</h2>
-            <p>PickMeUp.io</p>
+            <span>PickMeUp.io</span>
+        </div>
+        <div class="card">
+            <h2>A Hug without u is just Hg<br><br> and Hg is toxic.</h2>
+            <span>PickMeUp.io</span>
         </div>
         <div class="card">
             <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure facilis esse officiis? Laudantium quas
                 voluptates beatae recusandae.</h2>
-            <p>PickMeUp.io</p>
+            <span>PickMeUp.io</span>
         </div>
-        <div class="card">
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure facilis esse officiis? Laudantium quas
-                voluptates beatae recusandae.</h2>
-            <p>PickMeUp.io</p>
-        </div>
-        <div class="card">
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure facilis esse officiis? Laudantium quas
-                voluptates beatae recusandae.</h2>
-            <p>PickMeUp.io</p>
-        </div>
-        <div class="card">
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure facilis esse officiis? Laudantium quas
-                voluptates beatae recusandae.</h2>
-            <p>PickMeUp.io</p>
-        </div>
+
     </div>
+
     <div class="buttons">
         <div class="button"> <a href="#">New</a></div>
         <div class="button"> <a href="#">Save</a></div>
         <div class="button"> <a href="#">Share</a></div>
     </div>
+    <!-- 
     <div class="footer">
         <p> Made with ❤️ by ketan-16</p>
-    </div>
+    </div> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script>
+        let colorList = [['rgb(18, 18, 18)', '#ffffff', '#282828'],
+        ['rgb(238, 238, 238)', '#000000', '#eeeeee'], ['rgb(201,111,103)', '#fff', 'rgb(201,111,103)'],
+        ['rgb(68,37,35)', 'rgb(201,111,103)', 'rgb(68,37,35)'],
+        ['rgb(218,54,63)', '#fff', 'rgb(218,54,63)'], ['rgb(12,125,167)', '#fff', 'rgb(12,125,167)'],
+        ['rgb(131,199,224)', '#fff', 'rgb(131,199,224)'],
+        ['rgb(44,33,76)', 'rgb(131,199,224)', 'rgb(44,33,76)']]
 
+        function getnewColor(min, max) { // min and max included 
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
+
+
+        $(".card").click(function () {
+
+            let prevcardcolor = $(".card").css('backgroundColor')
+            let n = getnewColor(0, colorList.length - 1)
+            let newColorArr = colorList[n]
+
+            if (prevcardcolor == newColorArr[0]) {
+                let newN = (n + 1) % (colorList.length - 1)
+                newColorArr = colorList[newN]
+            }
+
+            $(".card").css('background-color', newColorArr[0]);
+            $(".button a").css('background-color', newColorArr[0]);
+            $(".card").css('color', newColorArr[1]);
+            $(".button a").css('color', newColorArr[1]);
+            $(".header h2").css('color', newColorArr[1]);
+            $("body").css('background-color', newColorArr[2]);
+        });
+    </script>
 </body>
 
 </html>
